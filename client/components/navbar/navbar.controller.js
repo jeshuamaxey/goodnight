@@ -14,7 +14,7 @@ angular.module('goodnightApp')
     },
     {
       'title': 'Quests',
-      'link': '/sessions',
+      'link': '/quests',
       'hiddenBeforeLogin': true
     },
     {
