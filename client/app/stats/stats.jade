@@ -1,9 +1,17 @@
 div(ng-include='"components/navbar/navbar.html"')
+script(src="http://code.highcharts.com/highcharts.src.js")
+
+
 
 header#banner.hero-unit
   .container
     h1 Stats
     p.lead Understand your drinking habits
+
+.container
+  .row
+    highchart(id="chart1" config="chartConfig" class="span10")
+
 
 .container
   .row
