@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('goodnightApp')
-  .controller('SessionsCtrl', function ($scopem $routeParams) {
+  .controller('SessionsCtrl', function ($scopem, $routeParams) {
     $scope.message = 'Hello';
 
 
