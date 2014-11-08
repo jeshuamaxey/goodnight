@@ -1,8 +1,14 @@
 'use strict';
 
 angular.module('goodnightApp')
-  .controller('SessionsCtrl', function ($scope) {
+  .controller('SessionsCtrl', function ($scopem, $routeParams) {
     $scope.message = 'Hello';
+
+
+    $scope.sessionId = $routeParams.sessionId;
+    $scope.singleSessionView = ($scope.sessionId && $scope.sessionId.length ? true : false);
+
+    console.log($scope.singlePlaceView, $scope.placeId);
 
     // var quest = {
     //   _id: 'the_id_string',
