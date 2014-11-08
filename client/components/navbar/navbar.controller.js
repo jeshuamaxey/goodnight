@@ -7,7 +7,7 @@ angular.module('goodnightApp')
       'link': '/'
     },
     {
-      'title': 'Sessions',
+      'title': 'Quests',
       'link': '/sessions'
     },
     {
