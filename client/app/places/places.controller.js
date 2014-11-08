@@ -1,17 +1,24 @@
 'use strict';
 
 angular.module('goodnightApp')
-  .controller('PlacesCtrl', function ($scope, $routeParams) {
-    console.log($routeParams)
+  .controller('PlacesCtrl', function ($scope, $routeParams, Place, Drink, User) {
+    // IRL this would be done on a per place basis
+    $scope.drinks = Drink.query({});
 
     $scope.placeId = $routeParams.placeId;
     $scope.singlePlaceView = ($scope.placeId && $scope.placeId.length ? true : false);
 
-    console.log($scope.singlePlaceView, $scope.placeId);
+    if($scope.singlePlaceView) singlePlace();
+    else allPlaces();
 
-    $scope.places = [{
-      _id: '__test_id__',
-      name: 'Wetherspoons',
-      logo: 'http://t3.gstatic.com/images?q=tbn:ANd9GcQ3OUgzphoVbox91t4Cf0N4S3F8m_CKUpdCS1Vq3_D_giDxhd2n7g'
-    }];
+    function singlePlace() {
+      $('body').addClass('scroll-lock');
+      $scope.place = Place.get({placeId: $scope.placeId});
+    }
+
+    function allPlaces() {
+      $('body').removeClass('scroll-lock');
+      $scope.places = Place.query({});
+    }
+
   });

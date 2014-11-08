@@ -15,14 +15,20 @@ $fa-font-path: "/bower_components/font-awesome/fonts";
     padding: 0.2em 0;
 }
 
+.scroll-lock {
+  overflow: hidden;
+}
+
 // Component styles are injected through grunt
 // injector
 @import 'account/login/login.scss';
 @import 'admin/admin.scss';
 @import 'api-gui/api-gui.scss';
+@import 'directives/menu/menu.scss';
 @import 'drinks/drinks.scss';
 @import 'main/main.scss';
 @import 'places/places.scss';
+@import 'quests/quests.scss';
 @import 'sessions/sessions.scss';
 @import 'stats/stats.scss';
 // endinjector
