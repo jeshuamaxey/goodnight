@@ -1,4 +1,10 @@
 div(ng-include='"components/navbar/navbar.html"')
 
-.col-md-12
-    | This is the places view.
+.col-md-12(ng-hide="singlePlaceView")
+  .list-group
+    a.list-group(ng-repeat="place in places", href="places?placeId={{place._id}}")
+      img.logo.pull-left(ng-src="{{place.logo}}")
+      span {{place.name}}
+
+.col-md-12(ng-show="singlePlaceView")
+  p placeId: {{placeId}}
