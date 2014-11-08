@@ -4,19 +4,23 @@ angular.module('goodnightApp')
   .controller('NavbarCtrl', function ($scope, $location, Auth) {
     $scope.menu = [{
       'title': 'Home',
-      'link': '/'
+      'link': '/',
+      'hiddenBeforeLogin': false
     },
     {
       'title': 'Sessions',
-      'link': '/sessions'
+      'link': '/sessions',
+      'hiddenBeforeLogin': true
     },
     {
       'title': 'Stats',
-      'link': '/stats'
+      'link': '/stats',
+      'hiddenBeforeLogin': true
     },
     {
       'title': 'Places',
-      'link': '/places'
+      'link': '/places',
+      'hiddenBeforeLogin': true
     }];
 
     $scope.isCollapsed = true;

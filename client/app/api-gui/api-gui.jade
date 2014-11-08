@@ -1,0 +1,41 @@
+.col-md-12
+  h3 Add Quest
+  form(role="form", name="addQuest")
+    div.form-group
+      label(for="startTime") startTime
+      input.form-control(type="time", ng-model="quest.startTime")
+      input.form-control(type="date", ng-model="quest.startDate")
+    div.form-group
+      label(for="endTime") endTime
+      input.form-control(type="time", ng-model="quest.endTime")
+      input.form-control(type="date", ng-model="quest.endDate")
+
+    div.form-group
+      label(for="unitsConsumed") unitsConsumed
+      input.form-control(type="number", min=0, step=0.5 ng-model="quest.unitsConsumed")
+    
+    div.form-group
+      label(for="places") places
+      input.form-control(type="text", ng-model="quest.places")
+
+    div.form-group
+      label(for="moneySpent") moneySpent
+      input.form-control(type="number", min=0, step=0.01, ng-model="quest.moneySpent")
+
+    div.form-group
+      label(for="pace") pace
+      input.form-control(type="number", min=0, step=0.01, ng-model="quest.pace")
+
+    div.form-group
+      label(for="startTime") startTime
+      input.form-control(type="date", ng-model="quest.startTime")
+
+    div.form-group
+      label(for="rating") rating
+      input.form-control(type="number", min=0, max=5, step=1, ng-model="quest.rating")
+
+    div.form-group
+      button.btn.btn-primary(type="submit", ng-click="saveNewQuest()") Save
+
+  div
+    pre {{quest | json}}
