@@ -5,6 +5,18 @@ angular.module('goodnightApp')
     $scope.menu = [{
       'title': 'Home',
       'link': '/'
+    },
+    {
+      'title': 'Sessions',
+      'link': '/sessions'
+    },
+    {
+      'title': 'Stats',
+      'link': '/stats'
+    },
+    {
+      'title': 'Places',
+      'link': '/places'
     }];
 
     $scope.isCollapsed = true;
