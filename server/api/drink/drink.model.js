@@ -5,7 +5,6 @@ var mongoose = require('mongoose'),
     ObjectId = Schema.Types.ObjectId;
 
 var DrinkSchema = new Schema({
-  place: ObjectId,
   name: String,
   units: Number,
   price: Number,

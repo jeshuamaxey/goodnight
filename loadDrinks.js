@@ -7,17 +7,37 @@ var db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error:'));
 db.once('open', function callback () {
   Place.find({name: 'Wetherspoons'}, function(err, ws){
-    for (var dr in drinks){
-        var d = drinks[dr];
-        var drink = new Drink(
-          {
-            place: ws._id,
-            name: d.name,
-            units: d.units,
-            price: d.price,
-            img: d.img
-          });
-        drink.save();
+    if(err){
+      console.log(err);
+      return;
     }
+    console.log(ws);
+    //var drinkslist = drinks.map(function(d){
+      //return {
+        //units: d.units,
+        //price: d.price,
+        //img: d.img
+      //};
+    //});
+
+    //function uniq(a) {
+        //var seen = {};
+        //var list = a.filter(function(item) {
+            //return seen.hasOwnProperty(item.name) ? false : (seen[item.name] = true);
+        //});
+        //console.log(seen);
+        //return list;
+    //}
+
+    //console.log(drinkslist);
+    Drink.collection.insert(drinks, function(err, docs){
+      if(err){
+        console.log(err);
+        mongoose.disconnect();
+        return;
+      }
+      console.log(docs.length + ' drinks inserted')
+      mongoose.disconnect();
+    })
   });
 })
