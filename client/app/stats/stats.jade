@@ -1,4 +1,26 @@
 div(ng-include='"components/navbar/navbar.html"')
 
-.col-md-12
-    | This is the stats view.
+header#banner.hero-unit
+  .container
+    h1 Stats
+    p.lead Understand your drinking habits
+
+.container
+  .row
+    .col-lg-12
+      h1.page-header Last Night
+      h3 £24.25, 12 units
+
+  .row.drink-row
+    .col-xs-3
+      img(src='http://www.drinkstuff.com/productimg/64537_large.jpg').drink-pic
+    .col-xs-5
+      h2 Drink Name
+      h4 X units
+    .col-xs-4
+      h2 £5.50
+      span.glyphicon.glyphicon-time.drink-time
+      h4 9.22PM
+
+
+
