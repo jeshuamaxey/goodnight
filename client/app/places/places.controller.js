@@ -1,15 +1,9 @@
 'use strict';
 
 angular.module('goodnightApp')
-  .controller('PlacesCtrl', function ($scope, $routeParams, Place, Drink) {
-
+  .controller('PlacesCtrl', function ($scope, $routeParams, Place, Drink, User) {
     // IRL this would be done on a per place basis
-    // $scope.drinks = Drink.query({});
-
-    // hack while db is out of action
-    Drink.query({}).then(function(drinks) {
-      $scope.drinks = drinks.data;
-    });
+    $scope.drinks = Drink.query({});
 
     $scope.placeId = $routeParams.placeId;
     $scope.singlePlaceView = ($scope.placeId && $scope.placeId.length ? true : false);
@@ -18,10 +12,12 @@ angular.module('goodnightApp')
     else allPlaces();
 
     function singlePlace() {
+      $('body').addClass('scroll-lock');
       $scope.place = Place.get({placeId: $scope.placeId});
     }
 
     function allPlaces() {
+      $('body').removeClass('scroll-lock');
       $scope.places = Place.query({});
     }
 
