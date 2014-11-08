@@ -1,1 +1,9 @@
-div this is the menu directive
+.row
+  h3 Drinks
+
+.row(ng-repeat="drink in drinks")
+  .col-xs-4.drink-name(ng-click="addDrinkToPurchase($index)") {{drink.name}}
+  .col-xs-4.drink.price {{drink.price | currency : '£'}}
+  .col-xs-4.drink-quantity(ng-click="removeDrinkFromPurchase($index)") {{drink.quantity || 0}}
+.sticky-footer
+  a.btn.btn-danger(ng-href="", ng-click="sendPurchase()") Continue
