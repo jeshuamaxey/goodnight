@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('goodnightApp')
-  .directive('menu', function (Purchase, $http) {
+  .directive('menu', function (Purchase) {
     return {
       templateUrl: 'app/directives/menu/menu.html',
       restrict: 'EA',
@@ -21,16 +21,8 @@ angular.module('goodnightApp')
             }
           });
           var purchase = new Purchase();
-          console.log(purchase)
           purchase.drinks = drinks;
-          console.log(purchase)
           purchase.$save();
-
-          // var purchase = {
-          //   drinks: drinks
-          // };
-
-          // $http.post('api/purchases', purchase);
 
         }
       }
