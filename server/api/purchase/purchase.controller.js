@@ -27,7 +27,7 @@ exports.show = function(req, res) {
 // Creates a new purchase in the DB.
 exports.create = function(req, res) {
   var data = {
-    user: ObjectId(req.body.user),
+    user: ObjectId(req.body.userIdString),
     pending: true,
     time: req.body.time,
     drinks: req.body.drinks
@@ -50,55 +50,66 @@ exports.create = function(req, res) {
       }, 0);
 
       //update the current quest
-      User.findById(req.body.user, function(err, user){
-        User.populate(user, {path: 'quest'}, function(err, fullUser){
-          if (err){
+      User.findById(req.body.userIdString)
+      .populate({path:'quest'})
+      .exec(function(err, user){
+        if (err){
+          console.log(err);
+          return;
+        }
+        if (!user) {
+          console.error("no user");
+          return;
+        }
+
+        //check if new quest
+        var quest;
+        if (!user.quest){
+          quest = new Quest({
+            user: data.user,
+            start: data.time,
+            moneySpent: 0,
+            totalUnits: 0,
+            active: true,
+            purchases: [],
+            unitsConsumed: 0
+          });
+        } else {
+          quest = user.quest;
+        }
+
+        //calculate units
+        quest.unitsConsumed += totalUnits;
+
+        //calculate moneySpent
+        var soFar = quest.moneySpent || 0;
+        quest.moneySpent = soFar + moneySpent;
+
+        //add the end time of this purchase
+        quest.end = data.time;
+
+        //update everything
+        var oldQuest = user.quest;
+        if (oldQuest && oldQuest._id != quest) {
+          oldQuest.active = false;
+          oldQuest.save();
+        }
+        console.log(quest);
+        quest.save(function(err, savedQuest){
+          if(err){
             console.log(err);
             return;
           }
-          if (!fullUser) {
-            console.error("no user");
-            return;
-          }
-
-          //check if new quest
-          var quest;
-          if (!fullUser.quest){
-            quest = new Quest({
-              user: data.user,
-              start: data.time,
-              moneySpent: 0,
-              totalUnits: 0,
-              active: true,
-              purchases: []
-            });
-          } else {
-            quest = fullUser.quest;
-          }
-
-          //calculate units
-          quest.unitsConsumed += totalUnits;
-
-          //calculate moneySpent
-          var soFar = quest.moneySpent || 0;
-          quest.moneySpent = soFar + moneySpent;
-
-          //add the end time of this purchase
-          quest.end = data.time;
-
-          //add this purchase to the quest
-          purchases.append(purchase);
-
-          //update everything
-          var oldQuest = fullUser.quest;
-          if (oldQuest && oldQuest._id != quest) {
-            oldQuest.active = false;
-            oldQuest.save();
-          }
-          quest.save(function(err, savedQuest){
-            user.quest = savedQuest._id;
-            user.save();
-          });
+          user.quest = savedQuest._id;
+          user.save();
+          savedQuest.update(
+            {$addToSet:{purchases: purchase}},
+            function(err){
+              if(err){
+                console.error(err);
+              }
+            }
+          );
         });
       });
     });

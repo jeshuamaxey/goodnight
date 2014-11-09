@@ -26,7 +26,7 @@ angular.module('goodnightApp')
           // add the user id to the purchase object
           User.get(function(user) {
             var purchase = new Purchase();
-            purchase.userId = user._id;
+            purchase.userIdString = user._id;
             purchase.time = Date.now();
             purchase.drinks = drinks;
             purchase.$save(function(pendingPurchase) {
