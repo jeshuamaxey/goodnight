@@ -26,11 +26,6 @@ angular.module('goodnightApp')
       'title': 'Places',
       'link': '/places',
       'hiddenBeforeLogin': true
-    },
-    {
-      'title': 'Drinks',
-      'link': '/drinks',
-      'hiddenBeforeLogin': true
     }];
 
     $scope.isCollapsed = true;
