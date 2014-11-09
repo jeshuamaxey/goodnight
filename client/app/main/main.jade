@@ -3,7 +3,7 @@ div(ng-include='"components/navbar/navbar.html"')
 .content-wrapper(class="{{activeQuest ? 'active' : ''}}")
 
   //- show if not logged in
-  header#banner.hero-unit
+  header#banner.hero-unit(ng-hide="loggedIn")
     .container
       h1 Quests
       p.lead Quantified nights out
@@ -11,7 +11,7 @@ div(ng-include='"components/navbar/navbar.html"')
       br
       a.btn.btn-lg.begin-quest(href="#") Sign Up
 
-  header#banner.hero-unit.red-hero(ng-show="!activeQuest.")
+  header#banner.hero-unit.red-hero(ng-show="!activeQuest && loggedIn")
     .container
       h2 Quest History
       h1.pace 1.8
@@ -28,7 +28,7 @@ div(ng-include='"components/navbar/navbar.html"')
         h3.row {{12}}
         .row.units units consumed
 
-  header#banner.hero-unit.green-hero(ng-show="activeQuest")
+  header#banner.hero-unit.green-hero(ng-show="activeQuest && loggedIn")
     .container
       h2 Tonight's Quest
       h1.pace 1.8

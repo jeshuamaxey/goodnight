@@ -8,4 +8,9 @@ angular.module('goodnightApp')
     console.log($scope.user)
 
     $scope.activeQuest = true;
+    if (Auth.getCurrentUser() != 'undefined') {
+    	$scope.loggedIn = true;
+    } else {
+    	$scope.loggedIn = false;
+    }
   });
