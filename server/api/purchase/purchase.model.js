@@ -2,11 +2,12 @@
 
 var mongoose = require('mongoose'),
     Schema = mongoose.Schema,
-    ObjectId = Schema.Types.ObjectId;
+    ObjectId = Schema.Types.ObjectId,
+    Drink = require('../drink/drink.model.js');
 
 var PurchaseSchema = new Schema({
   user: ObjectId,
-  drinks: Array,
+  drinks: [{type: ObjectId, ref: 'Drink'}],
   time: Number,
   pending: Boolean
 });

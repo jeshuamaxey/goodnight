@@ -2,6 +2,8 @@
 
 var _ = require('lodash');
 var Purchase = require('./purchase.model');
+var Quest = require('../quest/quest.model.js');
+var User = require('../user/user.model.js');
 var mongoose = require('mongoose');
 var ObjectId = mongoose.Schema.Types.ObjectId;
 
@@ -24,10 +26,82 @@ exports.show = function(req, res) {
 
 // Creates a new purchase in the DB.
 exports.create = function(req, res) {
-  req.body.user = ObjectId(req.body.user);
-  req.body.pending = true;
-  Purchase.create(req.body, function(err, purchase) {
+  var data = {
+    user: ObjectId(req.body.user),
+    pending: true,
+    time: req.body.time,
+    drinks: req.body.drinks
+  }
+  
+  Purchase.create(data, function(err, purchase) {
     if(err) { return handleError(res, err); }
+    Purchase.populate(purchase, {path: 'drinks'}, function(err, purchase){
+      if (err){
+        console.log(err);
+        return;
+      }
+      //calculate metrics
+      var totalUnits = purchase.drinks.reduce(function(prev, drink){
+        return prev + drink.units;
+      }, 0);
+
+      var moneySpent = purchase.drinks.reduce(function(prev, drink){
+        return prev + drink.price;
+      }, 0);
+
+      //update the current quest
+      User.findById(req.body.user, function(err, user){
+        User.populate(user, {path: 'quest'}, function(err, fullUser){
+          if (err){
+            console.log(err);
+            return;
+          }
+          if (!fullUser) {
+            console.error("no user");
+            return;
+          }
+
+          //check if new quest
+          var quest;
+          if (!fullUser.quest){
+            quest = new Quest({
+              user: data.user,
+              start: data.time,
+              moneySpent: 0,
+              totalUnits: 0,
+              active: true,
+              purchases: []
+            });
+          } else {
+            quest = fullUser.quest;
+          }
+
+          //calculate units
+          quest.unitsConsumed += totalUnits;
+
+          //calculate moneySpent
+          var soFar = quest.moneySpent || 0;
+          quest.moneySpent = soFar + moneySpent;
+
+          //add the end time of this purchase
+          quest.end = data.time;
+
+          //add this purchase to the quest
+          purchases.append(purchase);
+
+          //update everything
+          var oldQuest = fullUser.quest;
+          if (oldQuest && oldQuest._id != quest) {
+            oldQuest.active = false;
+            oldQuest.save();
+          }
+          quest.save(function(err, savedQuest){
+            user.quest = savedQuest._id;
+            user.save();
+          });
+        });
+      });
+    });
     return res.json(201, purchase);
   });
 };

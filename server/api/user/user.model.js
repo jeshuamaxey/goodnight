@@ -4,6 +4,7 @@ var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 var crypto = require('crypto');
 var authTypes = ['github', 'twitter', 'facebook', 'google'];
+var ObjectId = Schema.Types.ObjectId;
 
 var UserSchema = new Schema({
   name: String,
@@ -18,7 +19,8 @@ var UserSchema = new Schema({
   facebook: {},
   twitter: {},
   google: {},
-  github: {}
+  github: {},
+  quest: {type: ObjectId, ref: 'Quest'}
 });
 
 /**
