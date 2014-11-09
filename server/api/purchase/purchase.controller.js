@@ -28,7 +28,7 @@ exports.show = function(req, res) {
 exports.create = function(req, res) {
   var data = {
     user: ObjectId(req.body.userIdString),
-    pending: true,
+    status: 'pending',
     time: req.body.time,
     drinks: req.body.drinks
   }
@@ -120,13 +120,22 @@ exports.create = function(req, res) {
 // Updates an existing purchase in the DB.
 exports.update = function(req, res) {
   if(req.body._id) { delete req.body._id; }
+  //some kind of place validation
+  if(req.params.status !== 'processing'){
+    return res.json(400, 'invalid update');
+  }
   Purchase.findById(req.params.id, function (err, purchase) {
     if (err) { return handleError(res, err); }
     if(!purchase) { return res.send(404); }
     var updated = _.merge(purchase, req.body);
-    updated.save(function (err) {
+    updated.save(function (err, processingOrder) {
       if (err) { return handleError(res, err); }
-      return res.json(200, purchase);
+      //this is where stripe comes in
+      //assume stripe would have worked
+      processingOrder.status = 'successful';
+      processingOrder.save(function(err, successful){
+        return res.json(200, successful);
+      })
     });
   });
 };
