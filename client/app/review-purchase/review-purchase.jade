@@ -1,7 +1,21 @@
 div(ng-include='"components/navbar/navbar.html"')
 
-.col-md-12
-  pre {{purchase}}
+.col-md-12.pay-code-wrapper(ng-show="payCodeVisible")
+  img.pay-code(src="assets/images/qr-code.png")
 
-.col-md-12(ng-show="noIdError")
-  p WTF man no id parameter in the url
+div(ng-hide="missingIdError")
+  header.bill-item.hero-unit(ng-repeat="drink in drinks")
+    span {{drink.name}}
+    span.pull-right {{drink.quantity}} &times; {{drink.price | currency : '£'}} 
+  header.bill-item.hero-unit
+    span Total Bill:
+    span.pull-right {{price | currency : '£'}}
+  header.bill-item.hero-unit
+    span Total Spend Tonight:
+    span.pull-right {{user.summary.moneySpent | currency : '£'}}
+
+  header.hero-unit.red-hero.sticky-bottom(ng-click="togglePayCodeVisibility()")
+    | {{payCodeVisible ? 'Hide' : 'Show'}} Pay Code
+
+.col-md-12(ng-show="missingIdError")
+  p WTF man missing id parameter in the url
