@@ -8,4 +8,4 @@
     span.glyphicon.glyphicon-remove(ng-show="drink.quantity > 0", ng-click="removeDrinkFromPurchase($index)")
     | {{drink.quantity || 0}}
 .sticky-footer
-  a.btn.btn-danger(ng-href="review-purchase", ng-click="sendPurchase()") Continue
+  a.btn.btn-danger( ng-click="sendPurchase($event)") Continue
