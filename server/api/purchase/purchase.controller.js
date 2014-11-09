@@ -90,7 +90,7 @@ exports.create = function(req, res) {
 
         //update everything
         var oldQuest = user.quest;
-        if (oldQuest && oldQuest._id != quest) {
+        if (oldQuest && oldQuest._id !== quest._id) {
           oldQuest.active = false;
           oldQuest.save();
         }
