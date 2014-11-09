@@ -10,6 +10,15 @@ angular.module('goodnightApp')
     // wierd ass bug - $route§Params doesn't have a value in the key field
     // it should be purchaseId (see menu.jade)
     var purchaseId = $routeParams.purchaseId;
+    
+    // var qrcode = document.createElement('qrcode');
+    // $(qrcode).attr('size', 200);
+    // $(qrcode).attr('data', purchaseId);
+    // $('.pay-code-wrapper').append(qrcode);
+    
+    // $('qrcode').attr('data', purchaseId);
+
+    console.log(purchaseId);
 
     if(purchaseId) {
 

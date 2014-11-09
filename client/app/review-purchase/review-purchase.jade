@@ -2,6 +2,7 @@ div(ng-include='"components/navbar/navbar.html"')
 
 .col-md-12.pay-code-wrapper(ng-show="payCodeVisible")
   img.pay-code(src="assets/images/qr-code.png")
+  //- qrcode(data="545f7ccf881b0a2536203ddf", size="200", error-correction-level="M")
 
 div(ng-hide="missingIdError", style="margin-top: -20px;")
   header.bill-item.hero-unit(ng-repeat="drink in drinks", ng-class="{ 'emerald-bg' : $index%2==0, 'nephritis-bg' : $index%2==1}")

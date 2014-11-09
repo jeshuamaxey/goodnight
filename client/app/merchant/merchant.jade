@@ -1,8 +1,11 @@
 div(ng-include='"components/navbar/navbar.html"')
 
 .col-md-12
-  video.scanner
+  h2 Qr Scan
 
 .col-md-12
-  button.btn.btn-primary(ng-click="toggleScanner")
+  qr-scanner(ng-success="onSuccess(data)", ng-error="logError()", ng-video-error="logError()", width="300" height="320")
+
+.col-md-12.controls
+  button.btn.btn-primary(ng-click="toggleScanner()")
     | Turn {{scannerOn ? 'off': 'on'}} scanner

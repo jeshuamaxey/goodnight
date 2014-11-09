@@ -5,7 +5,8 @@ angular.module('goodnightApp', [
   'ngResource',
   'ngSanitize',
   'ngRoute',
-  'ui.bootstrap'
+  'ui.bootstrap',
+  'monospaced.qrcode'
 ])
   .config(function ($routeProvider, $locationProvider, $httpProvider) {
     $routeProvider
