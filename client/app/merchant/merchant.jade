@@ -6,6 +6,10 @@ div(ng-include='"components/navbar/navbar.html"')
 .col-md-12
   qr-scanner(ng-success="onSuccess(data)", ng-error="logError()", ng-video-error="logError()", width="300" height="320")
 
-.col-md-12.controls
-  button.btn.btn-primary(ng-click="toggleScanner()")
-    | Turn {{scannerOn ? 'off': 'on'}} scanner
+.col-md-12#success()
+  h3 Payment Processed
+
+
+//- .col-md-12.controls
+//-   button.btn.btn-primary(ng-click="toggleScanner()")
+//-     | Turn {{scannerOn ? 'off': 'on'}} scanner

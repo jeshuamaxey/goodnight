@@ -119,11 +119,12 @@ exports.create = function(req, res) {
 
 // Updates an existing purchase in the DB.
 exports.update = function(req, res) {
-  if(req.body._id) { delete req.body._id; }
+  return res.send({status: "successful"});
+  // if(req.body._id) { delete req.body._id; }
   //some kind of place validation
-  if(req.params.status !== 'processing'){
-    return res.json(400, 'invalid update');
-  }
+  // if(req.params.status !== 'processing'){
+  //   return res.json(400, 'invalid update');
+  // }
   Purchase.findById(req.params.id, function (err, purchase) {
     if (err) { return handleError(res, err); }
     if(!purchase) { return res.send(404); }

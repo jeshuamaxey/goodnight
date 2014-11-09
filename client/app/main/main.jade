@@ -31,18 +31,18 @@ div(ng-include='"components/navbar/navbar.html"')
   header#banner.hero-unit.green-hero(ng-show="activeQuest && loggedIn")
     .container
       h2 Tonight's Quest
-      h1.pace 1.8
+      h1.pace {{pace}}
         span units/hr
       h4 tonight's pace
     .row
       .col-xs-4
-        h3.row.unit-number {{7}}
-        .row.units time elapsed
+        h3.row.unit-number {{timeElapsed}}
+        .row.units time elapsed (mins)
       .col-xs-4
         h3.row.unit-number {{moneySpent | currency : '£'}}
         .row.units current spend
       .col-xs-4
-        h3.row.unit-number {{unitsConsumed}}
+        h3.row.unit-number {{(unitsConsumed || 3.2)}}
         .row.units units consumed
 
   a#banner.hero-unit.red-hero.sticky-bottom(ng-show="activeQuest && loggedIn", ng-href="timeline")
