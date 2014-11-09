@@ -1,0 +1,38 @@
+.drink-name {
+	font-size: 18px;
+}
+
+.drink-price {
+	font-size: 20px;
+}
+
+.drink-quantity {
+	font-size: 20px;
+	text-align: right;
+}
+
+.asphalt-bg {
+	background-color: #34495e;
+}
+
+.midnight-bg {
+	background-color: #2c3e50;
+}
+
+.drink-row {
+	color: #eee;
+	padding: 5px;
+}
+
+.active {
+	background-color: #1abc9c;
+}
+
+.noselect {
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}

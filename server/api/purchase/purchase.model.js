@@ -9,7 +9,7 @@ var PurchaseSchema = new Schema({
   user: ObjectId,
   drinks: [{type: ObjectId, ref: 'Drink'}],
   time: Number,
-  pending: Boolean
+  status: String
 });
 
 module.exports = mongoose.model('Purchase', PurchaseSchema);

@@ -36,14 +36,14 @@ div(ng-include='"components/navbar/navbar.html"')
       h4 tonight's pace
     .row
       .col-xs-4
-        h3.row {{7}}
-        .row time elapsed
+        h3.row.unit-number {{7}}
+        .row.units time elapsed
       .col-xs-4
-        h3.row {{28 | currency : '£'}}
+        h3.row.unit-number {{moneySpent | currency : '£'}}
         .row.units current spend
       .col-xs-4
-        h3.row {{12}}
+        h3.row.unit-number {{unitsConsumed}}
         .row.units units consumed
 
-  a#banner.hero-unit.red-hero.sticky-bottom(ng-show="activeQuest", ng-href="timeline")
+  a#banner.hero-unit.red-hero.sticky-bottom(ng-show="activeQuest && loggedIn", ng-href="timeline")
     b Drink Timeline
