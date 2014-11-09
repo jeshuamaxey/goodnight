@@ -1,21 +1,29 @@
 'use strict';
 
 angular.module('goodnightApp')
-  .controller('MainCtrl', function ($scope, $http, Auth, User) {
+  .controller('MainCtrl', function ($scope, $http, Auth, User, $interval) {
     // 
     var currentUser = Auth.getCurrentUser();
 
-    console.log(User.get(function(user) {
+    User.get(function(user) {
       var quest = user.quest;
-      console.log(quest);
-      $scope.pace = ((1.0*quest.unitsConsumed) / ((quest.end - quest.start) + (60*60*1000))) * (60*60*1000);
-      $scope.pace = $scope.pace.toFixed(2);
+      if(quest) {
+          $scope.activeQuest = quest.active;
 
-      $scope.timeElapsed = ((quest.end - quest.start)/(1000*60)).toFixed(1);
 
-    }))
+        $scope.pace = ((1.0*quest.unitsConsumed) / ((Date.now() - quest.start) + (60*60*1000))) * (60*60*1000);
+        $scope.pace = $scope.pace.toFixed(2);
 
-    $scope.activeQuest = true;
+        $interval(function() {
+          $scope.pace = ((1.0*quest.unitsConsumed) / ((Date.now() - quest.start) + (60*60*1000))) * (60*60*1000);
+          $scope.pace = $scope.pace.toFixed(2);
+        }, 5*1000);
+
+        $scope.timeElapsed = ((Date.now() - quest.start)/(1000*60)).toFixed(0);
+
+    }
+
+    })
     if (Auth.getCurrentUser() != 'undefined') {
         if(currentUser && currentUser.summary) {
           $scope.moneySpent = currentUser.summary.moneySpent.toFixed(2);

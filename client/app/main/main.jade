@@ -11,7 +11,7 @@ div(ng-include='"components/navbar/navbar.html"')
       br
       a.btn.btn-lg.begin-quest(href="#") Sign Up
 
-  header#banner.hero-unit.red-hero(ng-show="!activeQuest && loggedIn")
+  header#banner.hero-unit.yellow-hero(ng-show="!activeQuest && loggedIn")
     .container
       h2 Quest History
       h1.pace 1.8
@@ -19,13 +19,13 @@ div(ng-include='"components/navbar/navbar.html"')
       h4 average pace
     .row
       .col-xs-4
-        h3.row {{7}}
+        h3.row {{5}}
         .row quests
       .col-xs-4
-        h3.row {{28 | currency : '£'}}
+        h3.row {{128 | currency : '£'}}
         .row.units total spend
       .col-xs-4
-        h3.row {{12}}
+        h3.row {{41}}
         .row.units units consumed
 
   header#banner.hero-unit.green-hero(ng-show="activeQuest && loggedIn")
