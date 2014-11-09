@@ -1,6 +1,7 @@
 'use strict';
 
 var User = require('./user.model');
+var Quest = require('../quest/quest.model.js');
 var passport = require('passport');
 var config = require('../../config/environment');
 var jwt = require('jsonwebtoken');
@@ -46,7 +47,7 @@ exports.show = function (req, res, next) {
     //push a summary into the generated profile
     Quest.summary(userId, function (err, summaryData) {
       if(err) {
-        handleError(res, err);
+        res.send(500, err);
         return;
       }
       var responseData = user.profile;
@@ -93,13 +94,27 @@ exports.changePassword = function(req, res, next) {
  */
 exports.me = function(req, res, next) {
   var userId = req.user._id;
-  User.findOne({
-    _id: userId
-  }, '-salt -hashedPassword', function(err, user) { // don't ever give out the password or salt
+  //User.findOne({
+    //_id: userId
+  //}, '-salt -hashedPassword', function(err, user) { // don't ever give out the password or salt
+    //if (err) return next(err);
+    //if (!user) return res.json(404);
+    //res.json(user);
+  //});
+  User.findOne(userId, function (err, user) {
     if (err) return next(err);
-    if (!user) return res.json(404);
-    res.json(user);
+    if (!user) return res.send(404);
+    //push a summary into the generated profile
+    Quest.summary(userId, function (err, questedUser) {
+      if(err) {
+        res.send(500, err);
+        console.trace(err);
+        return;
+      }
+      res.json(questedUser);
+    });
   });
+
 };
 
 /**

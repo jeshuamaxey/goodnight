@@ -18,3 +18,5 @@ div(ng-include='"components/navbar/navbar.html"')
   .row.place-masthead
     img(ng-src="{{place.logo}}", title="{{place.name}} logo", alt="{{place.name}}")
   menu(drinks="{{drinks}}", style="padding-left: 0px;")
+  header.hero-unit.red-hero.sticky-bottom(ng-click="sendPurchase($event)", style="left: 0;")
+    | Continue   
