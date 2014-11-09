@@ -23,11 +23,14 @@ require('./api/drink/drink.model.js');
 require('./api/purchase/purchase.model.js');
 require('./api/quest/quest.model.js');
 
+
 // Setup server
 var app = express();
 var server = require('http').createServer(app);
 require('./config/express')(app);
 require('./routes')(app);
+//annoying cachey things disabled
+app.disable('etag');
 
 // Start server
 server.listen(config.port, config.ip, function () {
