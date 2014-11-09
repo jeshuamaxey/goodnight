@@ -8,6 +8,10 @@ $fa-font-path: "/bower_components/font-awesome/fonts";
  * App-wide Styles
  */
 
+html, body, .ng-scope {
+  background-color: #e7e7e7;
+}
+
 .browsehappy {
     margin: 0.2em 0;
     background: #ccc;
@@ -17,6 +21,10 @@ $fa-font-path: "/bower_components/font-awesome/fonts";
 
 .scroll-lock {
   overflow: hidden;
+}
+
+.navbar-text {
+  padding-left: 15px;
 }
 
 .navbar-default {
@@ -54,12 +62,14 @@ background-color: white;
 @import 'api-gui/api-gui.scss';
 @import 'directives/menu/menu.scss';
 @import 'main/main.scss';
+@import 'merchant/merchant.scss';
 @import 'places/places.scss';
 @import 'quests/quests.scss';
 @import 'review-purchase/review-purchase.scss';
 @import 'sessions/sessions.scss';
 @import 'stats/stats.scss';
 @import 'timeline/timeline.scss';
+@import 'navbar/navbar.scss';
 // endinjector
 @import '../assets/css/lists.scss';
 

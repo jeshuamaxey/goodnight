@@ -3,12 +3,10 @@
   form(role="form", name="addQuest")
     div.form-group
       label(for="startTime") startTime
-      input.form-control(type="time", ng-model="quest.startTime")
-      input.form-control(type="date", ng-model="quest.startDate")
+      input.form-control(type="number", ng-model="quest.startTime")
     div.form-group
       label(for="endTime") endTime
-      input.form-control(type="time", ng-model="quest.endTime")
-      input.form-control(type="date", ng-model="quest.endDate")
+      input.form-control(type="number", ng-model="quest.endTime")
 
     div.form-group
       label(for="unitsConsumed") unitsConsumed

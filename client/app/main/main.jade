@@ -1,54 +1,49 @@
 div(ng-include='"components/navbar/navbar.html"')
 
-//- header#banner.hero-unit
-//-   .container
-//-     h1 Quests
-//-     p.lead Quantified nights out
-//-     img(src='assets/images/swords.png', alt='I\'m Yeoman')
-//-     br
-//-     a.btn.btn-lg.begin-quest(href="#") Sign Up
+.content-wrapper(class="{{activeQuest ? 'active' : ''}}")
 
-//- header#banner.hero-unit
-//-   .container
-//-     h1 Quests
-//-     p.lead Quantified nights out
-//-     img(src='assets/images/swords.png', alt='I\'m Yeoman')
-//-     br
-//-     a.btn.btn-lg.begin-quest(href="#") Sign Up
+  //- show if not logged in
+  header#banner.hero-unit
+    .container
+      h1 Quests
+      p.lead Quantified nights out
+      img(src='assets/images/swords.png', alt='I\'m Yeoman')
+      br
+      a.btn.btn-lg.begin-quest(href="#") Sign Up
 
-//- header#banner.hero-unit.red-hero(ng-show="user.")
-//-   .container
-//-     h2 Quest History
-//-     h1.pace 1.8
-//-       span units/hr
-//-     h4 average pace
-//-   .row
-//-     .col-xs-4
-//-       h3.row {{7}}
-//-       .row quests
-//-     .col-xs-4
-//-       h3.row {{28 | currency : '£'}}
-//-       .row.units total spend
-//-     .col-xs-4
-//-       h3.row {{12}}
-//-       .row.units units consumed
+  header#banner.hero-unit.red-hero(ng-show="!activeQuest.")
+    .container
+      h2 Quest History
+      h1.pace 1.8
+        span units/hr
+      h4 average pace
+    .row
+      .col-xs-4
+        h3.row {{7}}
+        .row quests
+      .col-xs-4
+        h3.row {{28 | currency : '£'}}
+        .row.units total spend
+      .col-xs-4
+        h3.row {{12}}
+        .row.units units consumed
 
-header#banner.hero-unit.green-hero(ng-show="user")
-  .container
-    h2 Tonight's Quest
-    h1.pace 1.8
-      span units/hr
-    h4 tonight's pace
-  .row
-    .col-xs-4
-      h3.row {{7}}
-      .row time elapsed
-    .col-xs-4
-      h3.row {{28 | currency : '£'}}
-      .row.units current spend
-    .col-xs-4
-      h3.row {{12}}
-      .row.units units consumed
+  header#banner.hero-unit.green-hero(ng-show="activeQuest")
+    .container
+      h2 Tonight's Quest
+      h1.pace 1.8
+        span units/hr
+      h4 tonight's pace
+    .row
+      .col-xs-4
+        h3.row {{7}}
+        .row time elapsed
+      .col-xs-4
+        h3.row {{28 | currency : '£'}}
+        .row.units current spend
+      .col-xs-4
+        h3.row {{12}}
+        .row.units units consumed
 
-a#banner.hero-unit.red-hero.sticky-bottom(ng-show="user", ng-href="timeline")
-  | Drink Timeline
+  a#banner.hero-unit.red-hero.sticky-bottom(ng-show="activeQuest", ng-href="timeline")
+    b Drink Timeline
