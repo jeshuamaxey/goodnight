@@ -17,6 +17,12 @@ mongoose.connect(config.mongo.uri, config.mongo.options);
 // Populate DB with sample data
 if(config.seedDB) { require('./config/seed'); }
 
+// Bootstrap models
+require('./api/place/place.model.js');
+require('./api/drink/drink.model.js');
+require('./api/purchase/purchase.model.js');
+require('./api/quest/quest.model.js');
+
 // Setup server
 var app = express();
 var server = require('http').createServer(app);
