@@ -47,6 +47,7 @@ color: white;
 background-color: white;
 }
 
+
 // Component styles are injected through grunt
 // injector
 @import 'account/login/login.scss';
@@ -68,4 +69,6 @@ background-color: white;
   position: fixed;
   bottom: 0;
   width: 100%;
+  font-size: 20px;
+  padding: 10px;
 }

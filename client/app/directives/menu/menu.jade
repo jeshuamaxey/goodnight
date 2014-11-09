@@ -1,8 +1,8 @@
-.row.drink-row(ng-repeat="drink in drinks", ng-class="{ 'asphalt-bg' : $index%2==0, 'midnight-bg' : $index%2==1}")
+.row.drink-row.noselect(ng-repeat="drink in drinks", ng-class="{ active : drink.quantity>0, 'asphalt-bg' : $index%2==0, 'midnight-bg' : $index%2==1}")
   .col-xs-7.drink-name(ng-click="addDrinkToPurchase($index)") {{drink.name}}
-  .col-xs-3.drink-price {{drink.price | currency : '£'}}
-  .col-xs-2.drink-quantity
+  .col-xs-2.drink-price {{drink.price | currency : '£'}}
+  .col-xs-3.drink-quantity
     span.glyphicon.glyphicon-remove(ng-show="drink.quantity > 0", ng-click="removeDrinkFromPurchase($index)")
     | {{drink.quantity || 0}}
-.sticky-footer
-  a.btn.btn-danger( ng-click="sendPurchase($event)") Continue
+
+
