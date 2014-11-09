@@ -2,8 +2,10 @@
 
 var _ = require('lodash');
 var Quest = require('./quest.model');
-var ObjectId = Schema.Types.ObjectId;
 
+var mongoose = require('mongoose'),
+    Schema = mongoose.Schema,
+    ObjectId = Schema.Types.ObjectId;
 // Get list of quests
 exports.index = function(req, res) {
   var q = {};
