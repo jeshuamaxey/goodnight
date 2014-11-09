@@ -2,6 +2,7 @@
 
 var _ = require('lodash');
 var Purchase = require('./purchase.model');
+var ObjectId = require('mongoose').Types.ObjectId;
 
 // Get list of purchases
 exports.index = function(req, res) {
@@ -22,10 +23,42 @@ exports.show = function(req, res) {
 
 // Creates a new purchase in the DB.
 exports.create = function(req, res) {
-  Purchase.create(req.body, function(err, purchase) {
-    if(err) { return handleError(res, err); }
-    return res.json(201, purchase);
-  });
+  //User.findById(req.user._id, function (err, user) {
+    //if (err) return res.send(err);
+    //if (!user) return res.send(401);
+    //req.user = user;
+  //});
+
+  if (req.body.drinks){
+    Purchase.collections.insert(
+      {
+        user: new ObjectId(req.user._id),
+        drink: req.body.drinks,
+        time: Date.now()
+      },
+      function(err, docs){
+        if(err){
+          return handleError(res, err);
+        } 
+        console.log(docs.length + ' purchases made');
+        res.send(201, docs);
+      }
+    );
+  }
+
+  return handleError(res, 'bad query');
+
+  //Purchase.create(
+    //{
+      //user: req.user._id,
+      //drink: req.body.drinkId,
+      //time: Date.now()
+    //}, 
+    //function(err, purchase) {
+      //if(err) { return handleError(res, err); }
+      //return res.json(201, purchase);
+    //}
+  //);
 };
 
 // Updates an existing purchase in the DB.
