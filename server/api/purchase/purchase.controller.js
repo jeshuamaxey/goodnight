@@ -2,7 +2,10 @@
 
 var _ = require('lodash');
 var Purchase = require('./purchase.model');
-var ObjectId = require('mongoose').Types.ObjectId;
+var Quest = require('../quest/quest.model.js');
+var User = require('../user/user.model.js');
+var mongoose = require('mongoose');
+var ObjectId = mongoose.Schema.Types.ObjectId;
 
 // Get list of purchases
 exports.index = function(req, res) {
@@ -23,42 +26,95 @@ exports.show = function(req, res) {
 
 // Creates a new purchase in the DB.
 exports.create = function(req, res) {
-  //User.findById(req.user._id, function (err, user) {
-    //if (err) return res.send(err);
-    //if (!user) return res.send(401);
-    //req.user = user;
-  //});
-
-  if (req.body.drinks){
-    Purchase.collections.insert(
-      {
-        user: new ObjectId(req.user._id),
-        drink: req.body.drinks,
-        time: Date.now()
-      },
-      function(err, docs){
-        if(err){
-          return handleError(res, err);
-        } 
-        console.log(docs.length + ' purchases made');
-        res.send(201, docs);
-      }
-    );
+  var data = {
+    user: ObjectId(req.body.userIdString),
+    pending: true,
+    time: req.body.time,
+    drinks: req.body.drinks
   }
+  
+  Purchase.create(data, function(err, purchase) {
+    if(err) { return handleError(res, err); }
+    Purchase.populate(purchase, {path: 'drinks'}, function(err, purchase){
+      if (err){
+        console.log(err);
+        return;
+      }
+      //calculate metrics
+      var totalUnits = purchase.drinks.reduce(function(prev, drink){
+        return prev + drink.units;
+      }, 0);
 
-  return handleError(res, 'bad query');
+      var moneySpent = purchase.drinks.reduce(function(prev, drink){
+        return prev + drink.price;
+      }, 0);
 
-  //Purchase.create(
-    //{
-      //user: req.user._id,
-      //drink: req.body.drinkId,
-      //time: Date.now()
-    //}, 
-    //function(err, purchase) {
-      //if(err) { return handleError(res, err); }
-      //return res.json(201, purchase);
-    //}
-  //);
+      //update the current quest
+      User.findById(req.body.userIdString)
+      .populate({path:'quest'})
+      .exec(function(err, user){
+        if (err){
+          console.log(err);
+          return;
+        }
+        if (!user) {
+          console.error("no user");
+          return;
+        }
+
+        //check if new quest
+        var quest;
+        if (!user.quest){
+          quest = new Quest({
+            user: data.user,
+            start: data.time,
+            moneySpent: 0,
+            totalUnits: 0,
+            active: true,
+            purchases: [],
+            unitsConsumed: 0
+          });
+        } else {
+          quest = user.quest;
+        }
+
+        //calculate units
+        quest.unitsConsumed += totalUnits;
+
+        //calculate moneySpent
+        var soFar = quest.moneySpent || 0;
+        quest.moneySpent = soFar + moneySpent;
+
+        //add the end time of this purchase
+        quest.end = data.time;
+
+        //update everything
+        var oldQuest = user.quest;
+        if (oldQuest && oldQuest._id != quest) {
+          oldQuest.active = false;
+          oldQuest.save();
+        }
+        console.log(quest);
+        quest.save(function(err, savedQuest){
+          if(err){
+            console.log(err);
+            return;
+          }
+          user.quest = savedQuest._id;
+          user.save();
+          savedQuest.update(
+            {$addToSet:{purchases: purchase}},
+            function(err){
+              if(err){
+                console.error(err);
+              }
+            }
+          );
+        });
+      });
+    });
+    return res.json(201, purchase);
+  });
 };
 
 // Updates an existing purchase in the DB.

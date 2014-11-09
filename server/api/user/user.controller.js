@@ -43,7 +43,16 @@ exports.show = function (req, res, next) {
   User.findById(userId, function (err, user) {
     if (err) return next(err);
     if (!user) return res.send(404);
-    res.json(user.profile);
+    //push a summary into the generated profile
+    Quest.summary(userId, function (err, summaryData) {
+      if(err) {
+        handleError(res, err);
+        return;
+      }
+      var responseData = user.profile;
+      user.summary = summaryData;
+      res.json(responseData);
+    });
   });
 };
 

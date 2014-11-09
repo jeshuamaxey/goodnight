@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('goodnightApp')
-  .directive('menu', function (Purchase) {
+  .directive('menu', function (Purchase, User, $location) {
     return {
       templateUrl: 'app/directives/menu/menu.html',
       restrict: 'EA',
@@ -13,16 +13,28 @@ angular.module('goodnightApp')
         scope.removeDrinkFromPurchase = function(i) {
           scope.drinks[i].quantity = 0;
         }
-        scope.sendPurchase = function() {
+        scope.sendPurchase = function($event) {
+          $event.preventDefault();
+
           var drinks = [];
           scope.drinks.forEach(function(drink) {
             if(drink.quantity > 0) {
               for(var c = 0; c < drink.quantity; c++) drinks.push(drink._id);
             }
           });
-          var purchase = new Purchase();
-          purchase.drinks = drinks;
-          purchase.$save();
+
+          // add the user id to the purchase object
+          User.get(function(user) {
+            var purchase = new Purchase();
+            purchase.userIdString = user._id;
+            purchase.time = Date.now();
+            purchase.drinks = drinks;
+            purchase.$save(function(pendingPurchase) {
+              // sorry for routing from a directive, but it is a hackathon
+              $location.url('review-purchase?purchaseId='+pendingPurchase._id);
+            });
+
+          })
 
         }
       }

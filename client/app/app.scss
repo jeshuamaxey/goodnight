@@ -53,11 +53,18 @@ background-color: white;
 @import 'admin/admin.scss';
 @import 'api-gui/api-gui.scss';
 @import 'directives/menu/menu.scss';
-@import 'drinks/drinks.scss';
 @import 'main/main.scss';
 @import 'places/places.scss';
 @import 'quests/quests.scss';
+@import 'review-purchase/review-purchase.scss';
 @import 'sessions/sessions.scss';
 @import 'stats/stats.scss';
 // endinjector
 @import '../assets/css/lists.scss';
+
+// helper class
+.sticky-bottom {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+}
