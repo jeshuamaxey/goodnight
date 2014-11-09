@@ -32,6 +32,7 @@ QuestSchema.statics.summary = function(user, cb) {
       return cb(err);
     }
     if(fullUser.quest && fullUser.quest.active){
+      fullUser.summary = fullUser.quest;
       return cb(null, fullUser);
     }
 
@@ -57,12 +58,12 @@ QuestSchema.statics.summary = function(user, cb) {
         return acc + quest.unitsConsumed;
       }, 0);
 
-      fullUser.quest = new self({
+      fullUser.summary = {
         pace: avgpace, 
         moneySpent: moneySpent, 
         unitsConsumed: unitsConsumed,
         acive: false
-      });
+      };
 
       cb(
         null, 

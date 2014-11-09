@@ -20,7 +20,8 @@ var UserSchema = new Schema({
   twitter: {},
   google: {},
   github: {},
-  quest: {type: ObjectId, ref: 'Quest'}
+  quest: {type: ObjectId, ref: 'Quest'},
+  summary: {} 
 });
 
 /**
