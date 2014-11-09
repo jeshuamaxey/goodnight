@@ -94,24 +94,17 @@ exports.changePassword = function(req, res, next) {
  */
 exports.me = function(req, res, next) {
   var userId = req.user._id;
-  //User.findOne({
-    //_id: userId
-  //}, '-salt -hashedPassword', function(err, user) { // don't ever give out the password or salt
-    //if (err) return next(err);
-    //if (!user) return res.json(404);
-    //res.json(user);
-  //});
   User.findOne(userId, function (err, user) {
     if (err) return next(err);
     if (!user) return res.send(404);
     //push a summary into the generated profile
-    Quest.summary(userId, function (err, questedUser) {
+    Quest.summary(userId, function (err, summariedUser) {
       if(err) {
         res.send(500, err);
         console.trace(err);
         return;
       }
-      res.json(questedUser);
+      res.json(summariedUser);
     });
   });
 
