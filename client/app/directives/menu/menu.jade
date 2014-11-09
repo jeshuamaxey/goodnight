@@ -2,9 +2,9 @@
   h3 Drinks
 
 .row(ng-repeat="drink in drinks")
-  .col-xs-4.drink-name(ng-click="addDrinkToPurchase($index)") {{drink.name}}
-  .col-xs-4.drink.price {{drink.price | currency : '£'}}
-  .col-xs-4.drink-quantity
+  .col-xs-7.drink-name(ng-click="addDrinkToPurchase($index)") {{drink.name}}
+  .col-xs-3.drink-price {{drink.price | currency : '£'}}
+  .col-xs-2.drink-quantity
     span.glyphicon.glyphicon-remove(ng-show="drink.quantity > 0", ng-click="removeDrinkFromPurchase($index)")
     | {{drink.quantity || 0}}
 .sticky-footer

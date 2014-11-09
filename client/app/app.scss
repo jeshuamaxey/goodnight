@@ -19,6 +19,34 @@ $fa-font-path: "/bower_components/font-awesome/fonts";
   overflow: hidden;
 }
 
+.navbar-default {
+	background-color: #34495e;
+}
+
+.navbar-default .navbar-brand {
+color: white;
+}
+
+.navbar-default .navbar-brand:hover {
+color: #eee;
+}
+
+.navbar-default .navbar-nav > li > a {
+	color: white;
+}
+
+.navbar-default .navbar-nav > li > a:hover {
+	color: #eee;
+}
+
+.navbar-default .navbar-text {
+color: white;
+}
+
+.navbar-default .navbar-toggle .icon-bar {
+background-color: white;
+}
+
 // Component styles are injected through grunt
 // injector
 @import 'account/login/login.scss';
@@ -32,3 +60,4 @@ $fa-font-path: "/bower_components/font-awesome/fonts";
 @import 'sessions/sessions.scss';
 @import 'stats/stats.scss';
 // endinjector
+@import '../assets/css/lists.scss';
