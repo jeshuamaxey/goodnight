@@ -6,7 +6,7 @@ var mongoose = require('mongoose'),
 
 var PurchaseSchema = new Schema({
   user: ObjectId,
-  drink: ObjectId,
+  drinks: Array,
   time: Number
 });
 
