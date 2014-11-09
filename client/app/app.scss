@@ -19,6 +19,34 @@ $fa-font-path: "/bower_components/font-awesome/fonts";
   overflow: hidden;
 }
 
+.navbar-default {
+	background-color: #34495e;
+}
+
+.navbar-default .navbar-brand {
+color: white;
+}
+
+.navbar-default .navbar-brand:hover {
+color: #eee;
+}
+
+.navbar-default .navbar-nav > li > a {
+	color: white;
+}
+
+.navbar-default .navbar-nav > li > a:hover {
+	color: #eee;
+}
+
+.navbar-default .navbar-text {
+color: white;
+}
+
+.navbar-default .navbar-toggle .icon-bar {
+background-color: white;
+}
+
 // Component styles are injected through grunt
 // injector
 @import 'account/login/login.scss';
@@ -33,43 +61,11 @@ $fa-font-path: "/bower_components/font-awesome/fonts";
 @import 'stats/stats.scss';
 @import 'timeline/timeline.scss';
 // endinjector
+@import '../assets/css/lists.scss';
 
 // helper class
 .sticky-bottom {
   position: fixed;
   bottom: 0;
   width: 100%;
-}
-
-// lists.scss (couldn't get it to import)
-.green-hero {
-  background-color: #2ecc71;
-}
-
-.blue-hero {
-  background-color: #3498db;
-}
-
-.red-hero {
-  background-color: #e74c3c;
-}
-
-.yellow-hero {
-  background-color: #f1c40f;
-}
-
-.orange-hero {
-  background-color: #e67e22;
-}
-
-.turqoise-hero {
-  background-color: #1abc9c;
-}
-
-.list-main {
-  margin-top: 0px !important;
-}
-
-.list-metrics {
-  font-size: 40px;
 }

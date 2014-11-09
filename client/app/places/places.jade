@@ -1,12 +1,20 @@
 div(ng-include='"components/navbar/navbar.html"')
 
-.col-md-12.multiPlaceView(ng-hide="singlePlaceView")
-  .list-group
-    a.list-group-item.logo-wrapper(ng-repeat="place in places", href="places?placeId={{place._id}}")
-      img.logo.pull-left(ng-src="{{place.logo}}")
-      //- span {{place.name}}
+.multiPlaceView(ng-hide="singlePlaceView")
+  a(ng-repeat="place in places", href="places?placeId={{place._id}}")
+    header#banner.hero-unit(ng-class="{ 'purple-hero' : $index%6==0, 'turqouise-hero' : $index%6==1, 'red-hero' : $index%6==2, 'yellow-hero' : $index%6==3, 'green-hero' : $index%6==4, 'blue-hero' : $index%6==5}")
+      .container
+        //h2.list-main {{place.name}}
+        .col-xs-3
+          //h4 Units 
+          //span.list-metric {{place.drinks}}
+        .col-xs-6 
+          img(ng-src="{{place.logo}}").place-logo
+        .col-xs-3
+          //h4 Pace
+          //span.list-metric 5
 
 .col-md-12.singlePlaceView(ng-show="singlePlaceView")
   .row.place-masthead
     img(ng-src="{{place.logo}}", title="{{place.name}} logo", alt="{{place.name}}")
-  menu(drinks="{{drinks}}")
+  menu(drinks="{{drinks}}", style="padding-left: 0px;")
