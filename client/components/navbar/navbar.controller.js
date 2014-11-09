@@ -3,7 +3,7 @@
 angular.module('goodnightApp')
   .controller('NavbarCtrl', function ($scope, $location, Auth) {
     $scope.menu = [{
-      'title': 'Start a session',
+      'title': 'Start a Quest',
       'link': '/places',
       'hiddenBeforeLogin': true
     },
@@ -13,8 +13,8 @@ angular.module('goodnightApp')
       'hiddenBeforeLogin': false
     },
     {
-      'title': 'Sessions',
-      'link': '/sessions',
+      'title': 'Quests',
+      'link': '/quests',
       'hiddenBeforeLogin': true
     },
     {

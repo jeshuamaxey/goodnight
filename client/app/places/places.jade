@@ -1,10 +1,12 @@
 div(ng-include='"components/navbar/navbar.html"')
 
-.col-md-12(ng-hide="singlePlaceView")
+.col-md-12.multiPlaceView(ng-hide="singlePlaceView")
   .list-group
-    a.list-group(ng-repeat="place in places", href="places?placeId={{place._id}}")
+    a.list-group-item.logo-wrapper(ng-repeat="place in places", href="places?placeId={{place._id}}")
       img.logo.pull-left(ng-src="{{place.logo}}")
-      span {{place.name}}
+      //- span {{place.name}}
 
-.col-md-12(ng-show="singlePlaceView")
-  p placeId: {{placeId}}
+.col-md-12.singlePlaceView(ng-show="singlePlaceView")
+  .row.place-masthead
+    img(ng-src="{{place.logo}}", title="{{place.name}} logo", alt="{{place.name}}")
+  menu(drinks="{{drinks}}")
