@@ -5,8 +5,6 @@ angular.module('goodnightApp')
     // IRL this would be done on a per place basis
     $scope.drinks = Drink.query({});
 
-    console.log(Purchase);
-
     $scope.placeId = $routeParams.placeId;
     $scope.singlePlaceView = ($scope.placeId && $scope.placeId.length ? true : false);
 

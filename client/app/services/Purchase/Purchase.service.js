@@ -2,5 +2,5 @@
 
 angular.module('goodnightApp')
   .service('Purchase', function ($resource) {
-    return $resource('api/purchasess/:purchaseId', {purchaseId: '@id'});
+    return $resource('api/purchases/:purchaseId', {purchaseId: '@id'});
   });

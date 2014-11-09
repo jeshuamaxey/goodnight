@@ -29,7 +29,7 @@ exports.create = function(req, res) {
     //req.user = user;
   //});
 
-  if (req.body.drinkIds){
+  if (req.body.drinks){
     Purchase.collections.insert(
       {
         user: new ObjectId(req.user._id),
@@ -45,6 +45,8 @@ exports.create = function(req, res) {
       }
     );
   }
+
+  return handleError(res, 'bad query');
 
   //Purchase.create(
     //{
