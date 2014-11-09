@@ -2,10 +2,15 @@
 
 var _ = require('lodash');
 var Quest = require('./quest.model');
+var ObjectId = Schema.Types.ObjectId;
 
 // Get list of quests
 exports.index = function(req, res) {
-  Quest.find(function (err, quests) {
+  var q = {};
+  if (req.query.user){
+    q.user = new ObjectId(req.query.user);
+  }
+  Quest.find(q, function (err, quests) {
     if(err) { return handleError(res, err); }
     return res.json(200, quests);
   });
