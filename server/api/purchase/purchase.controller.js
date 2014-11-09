@@ -2,6 +2,8 @@
 
 var _ = require('lodash');
 var Purchase = require('./purchase.model');
+var mongoose = require('mongoose');
+var ObjectId = mongoose.Schema.Types.ObjectId;
 
 // Get list of purchases
 exports.index = function(req, res) {
@@ -22,6 +24,8 @@ exports.show = function(req, res) {
 
 // Creates a new purchase in the DB.
 exports.create = function(req, res) {
+  req.body.user = ObjectId(req.body.user);
+  req.body.pending = true;
   Purchase.create(req.body, function(err, purchase) {
     if(err) { return handleError(res, err); }
     return res.json(201, purchase);

@@ -7,7 +7,8 @@ var mongoose = require('mongoose'),
 var PurchaseSchema = new Schema({
   user: ObjectId,
   drinks: Array,
-  time: Number
+  time: Number,
+  pending: Boolean
 });
 
 module.exports = mongoose.model('Purchase', PurchaseSchema);
