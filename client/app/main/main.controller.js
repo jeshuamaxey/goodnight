@@ -13,4 +13,5 @@ angular.module('goodnightApp')
     } else {
     	$scope.loggedIn = false;
     }
+    console.log(Auth.getCurrentUser());
   });

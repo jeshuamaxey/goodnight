@@ -37,7 +37,7 @@ div(ng-include='"components/navbar/navbar.html"')
     .row
       .col-xs-4
         h3.row {{7}}
-        .row time elapsed
+        .row.units time elapsed
       .col-xs-4
         h3.row {{28 | currency : '£'}}
         .row.units current spend
@@ -45,5 +45,5 @@ div(ng-include='"components/navbar/navbar.html"')
         h3.row {{12}}
         .row.units units consumed
 
-  a#banner.hero-unit.red-hero.sticky-bottom(ng-show="activeQuest", ng-href="timeline")
+  a#banner.hero-unit.red-hero.sticky-bottom(ng-show="activeQuest && loggedIn", ng-href="timeline")
     b Drink Timeline

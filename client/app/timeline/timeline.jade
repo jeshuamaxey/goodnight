@@ -2,4 +2,8 @@ div(ng-include='"components/navbar/navbar.html"')
 
 header#banner.hero-unit.green-hero()
   | Tonight's Drinks
-header#banner.hero-unit.green-hero(ng-repeat="drink in drinks")
+.row.drink-row.noselect(ng-repeat="drink in drinks", ng-class="{'asphalt-bg' : $index%2==0, 'midnight-bg' : $index%2==1}")
+  .col-xs-7.drink-name {{drink.name}}
+  .col-xs-2.drink-price {{drink.price | currency : '£'}}
+  .col-xs-3.drink-quantity
+    | {{drink.quantity || 0}}

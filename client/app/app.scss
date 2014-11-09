@@ -56,12 +56,14 @@ background-color: white;
 }
 
 
+
 // Component styles are injected through grunt
 // injector
 @import 'account/login/login.scss';
 @import 'admin/admin.scss';
 @import 'api-gui/api-gui.scss';
 @import 'directives/menu/menu.scss';
+@import 'directives/scanner/scanner.scss';
 @import 'main/main.scss';
 @import 'merchant/merchant.scss';
 @import 'places/places.scss';
