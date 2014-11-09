@@ -3,8 +3,8 @@ div(ng-include='"components/navbar/navbar.html"')
 .col-md-12.pay-code-wrapper(ng-show="payCodeVisible")
   img.pay-code(src="assets/images/qr-code.png")
 
-div(ng-hide="missingIdError")
-  header.bill-item.hero-unit.green-hero(ng-repeat="drink in drinks")
+div(ng-hide="missingIdError", style="margin-top: -20px;")
+  header.bill-item.hero-unit(ng-repeat="drink in drinks", ng-class="{ 'emerald-bg' : $index%2==0, 'nephritis-bg' : $index%2==1}")
     span {{drink.name}}
     span.pull-right {{drink.quantity}} &times; {{drink.price | currency : '£'}} 
   header.bill-item.hero-unit
