@@ -1,4 +1,4 @@
-div.navbar.navbar-default.navbar-static-top(ng-controller='NavbarCtrl')
+div.navbar.navbar-default.navbar-static-top.navbar-absolute(ng-controller='NavbarCtrl')
   div.container
     div.navbar-header
       button.navbar-toggle(type='button', ng-click='isCollapsed = !isCollapsed')
@@ -6,7 +6,7 @@ div.navbar.navbar-default.navbar-static-top(ng-controller='NavbarCtrl')
         span.icon-bar
         span.icon-bar
         span.icon-bar
-      a.navbar-brand(href='/') goodnight
+      a.navbar-brand(href='/') Knights Out
 
     div#navbar-main.navbar-collapse.collapse(collapse='isCollapsed')
       ul.nav.navbar-nav

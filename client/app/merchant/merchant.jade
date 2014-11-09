@@ -1,0 +1,8 @@
+div(ng-include='"components/navbar/navbar.html"')
+
+.col-md-12
+  video.scanner
+
+.col-md-12
+  button.btn.btn-primary(ng-click="toggleScanner")
+    | Turn {{scannerOn ? 'off': 'on'}} scanner

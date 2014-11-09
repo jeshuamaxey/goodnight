@@ -6,4 +6,6 @@ angular.module('goodnightApp')
     var user = User.get()
     console.log(user);
     console.log($scope.user)
+
+    $scope.activeQuest = true;
   });
